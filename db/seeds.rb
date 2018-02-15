@@ -1,5 +1,6 @@
 require 'random_data'
 
+#Seeds for post db
 50.times do
   Post.create!(
     title: RandomData.random_sentance,
@@ -22,3 +23,14 @@ Comment.find_or_create_by!(post: unique_post, body: "Unique body")
 puts 'Seed finished'
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
+
+#Seeds for advertisement db
+50.times do
+  Advertisement.create!(
+    title: RandomData.random_sentance,
+    copy: RandomData.random_paragraph
+  )
+end
+
+puts 'Seed finished'
+puts "#{Advertisement.count} ads created"
