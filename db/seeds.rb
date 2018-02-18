@@ -20,7 +20,6 @@ end
 unique_post = Post.find_or_create_by!(title: "Unique title", body: "Unique body")
 Comment.find_or_create_by!(post: unique_post, body: "Unique body")
 
-puts 'Seed finished'
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
 
@@ -32,5 +31,15 @@ puts "#{Comment.count} comments created"
   )
 end
 
-puts 'Seed finished'
 puts "#{Advertisement.count} ads created"
+
+#Seeds for questions db
+50.times do
+  Question.create!(
+    title: RandomData.random_sentance,
+    body: RandomData.random_paragraph
+  )
+end
+
+puts 'Seed finished'
+puts "#{Question.count} questions created"
