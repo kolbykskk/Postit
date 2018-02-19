@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe AdvertisementController, type: :controller do
 
-  let(:my_ad) {Advertisement.create!(title: RandomData.random_sentance, copy: RandomData.random_paragraph)}
+  let(:my_ad) {Advertisement.create!(title: RandomData.random_sentence, copy: RandomData.random_paragraph)}
 
   describe "GET #index" do
     it "returns http success" do
@@ -35,16 +35,16 @@ RSpec.describe AdvertisementController, type: :controller do
 
   describe "GET #create" do
     it "increases the number of ads by 1" do
-      expect{ ad :create, params: { ad: { title: RandomData.random_sentance, copy: RandomData.random_paragraph } } }.to change(Advertisement,:count).by(1)
+      expect{ ad :create, params: { ad: { title: RandomData.random_sentence, copy: RandomData.random_paragraph } } }.to change(Advertisement,:count).by(1)
     end
 
     it "assigns the new ad to @ad" do
-      ad :create, params: { ad: { title: RandomData.random_sentance, copy: RandomData.random_paragraph } }
+      ad :create, params: { ad: { title: RandomData.random_sentence, copy: RandomData.random_paragraph } }
       expect(assigns(:ad)).to eq Advertisement.last
     end
 
     it "redirects to the last post" do
-      ad :create, params: { ad: { title: RandomData.random_sentance, copy: RandomData.random_paragraph } }
+      ad :create, params: { ad: { title: RandomData.random_sentence, copy: RandomData.random_paragraph } }
       expect(response).to redirect_to Advertisement.last
     end
   end
