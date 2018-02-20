@@ -9,7 +9,7 @@ RSpec.describe Post, type: :model do
   let(:topic) { Topic.create!(name: name, description: description) }
   let(:post) { topic.posts.create!(title: title, body: body) }
 
-  it { is_expected.to belong_to(:topic) }
+  it { is_expected.to belong_to(:Topic) }
 
   describe "attributes" do
     it "has title and body attributes" do

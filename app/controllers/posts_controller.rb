@@ -10,13 +10,9 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new
-    @post.title = params[:post][:title]
-    @post.body = params[:post][:body]
     @topic = Topic.find(params[:topic_id])
-
-    @post.topic = @topic
-
+    @post = @topic.posts.build(params_for_post)
+    
     if @post.save
       flash[:notice] = "Post was saved."
       redirect_to [@topic, @post]
@@ -32,10 +28,8 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    @post.title = params[:post][:title]
-    @post.body = params[:post][:body]
 
-    if @post.save
+    if @post.update_attributes(params_for_post)
       flash[:notice] = "Post was updated."
       redirect_to [@post.topic, @post]
     else
@@ -56,5 +50,8 @@ class PostsController < ApplicationController
          render :show
        end
      end
-
+private
+  def params_for_post
+    params.require(:post).permit(:title, :body)
+  end
 end

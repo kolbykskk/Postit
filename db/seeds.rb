@@ -30,6 +30,16 @@ end
 unique_post = Post.find_or_create_by!(title: "Unique title", body: "Unique body")
 Comment.find_or_create_by!(post: unique_post, body: "Unique body")
 
+#seeds for sponsored_posts
+15.times do
+  SponsoredPost.create!(
+    topic: topics.sample,
+    title: RandomData.random_sentence,
+    body: RandomData.random_paragraph,
+    price: 5
+  )
+end
+
 puts 'Seed finished'
 puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
