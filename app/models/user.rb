@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   before_save { self.email = email.downcase if email.present? }
+  before_save :format_name
 
   validates :name, length: { minimum: 1, maximum: 100 }, presence: true
 
@@ -12,4 +13,11 @@ class User < ApplicationRecord
             length: { minimum: 3, maximum: 254 }
 
   has_secure_password
+
+  def format_name
+    if name
+      format_name = name.split(" ").map! { |name| name.capitalize }
+      self.name = format_name.join(" ")
+    end
+  end
 end
