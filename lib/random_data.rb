@@ -25,7 +25,7 @@ module RandomData
   end
 
   def self.random_int
-    int = [1..100]
+    int = (1..100).to_a
     int.shuffle!
     int.sample
   end
