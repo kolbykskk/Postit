@@ -1,5 +1,15 @@
 require 'random_data'
 
+# Create Users
+5.times do
+  User.create!(
+  name:     RandomData.random_name,
+  email:    RandomData.random_email,
+  password: RandomData.random_sentence
+  )
+end
+users = User.all
+
 #Seeds for topics
 15.times do
   Topic.create!(
@@ -12,6 +22,7 @@ topics = Topic.all
 #Seeds for post db
 50.times do
   Post.create!(
+    user: users.sample,
     topic: topics.sample,
     title: RandomData.random_sentence,
     body: RandomData.random_paragraph
@@ -27,21 +38,17 @@ posts = Post.all
   )
 end
 
-unique_post = Post.find_or_create_by!(title: "Unique title", body: "Unique body")
+unique_post = Post.find_or_create_by!(user: users.sample, topic: topics.sample, title: "Unique title", body: "Unique body >= 20 chars")
 Comment.find_or_create_by!(post: unique_post, body: "Unique body")
 
+user = User.first
+user.update_attributes!(
+  email: 'kolbykalafut@gmail.com',
+  password: 'helloworld'
+)
+
 puts 'Seed finished'
+puts "#{User.count} users created"
 puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
-
-#Seeds for advertisement db
-50.times do
-  Advertisement.create!(
-    title: RandomData.random_sentence,
-    copy: RandomData.random_paragraph
-  )
-end
-
-puts 'Seed finished'
-puts "#{Advertisement.count} ads created"
