@@ -38,12 +38,21 @@ posts = Post.all
   )
 end
 
-unique_post = Post.find_or_create_by!(user: users.sample, topic: topics.sample, title: "Unique title", body: "Unique body >= 20 chars")
-Comment.find_or_create_by!(post: unique_post, body: "Unique body")
+# unique_post = Post.find_or_create_by!(user: users.sample, topic: topics.sample, title: "Unique title", body: "Unique body >= 20 chars")
+# Comment.find_or_create_by!(post: unique_post, body: "Unique body")
 
-user = User.first
-user.update_attributes!(
-  email: 'kolbykalafut@gmail.com',
+# Create an admin
+admin = User.create!(
+  name: 'Admin User',
+  email: 'admin@example.com',
+  password: 'helloworld',
+  role: 'admin'
+)
+
+# Create a member
+member = User.create!(
+  name: 'Member User',
+  email: 'member@example.com',
   password: 'helloworld'
 )
 
