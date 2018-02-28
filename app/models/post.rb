@@ -23,6 +23,7 @@ class Post < ApplicationRecord
   end
 
   default_scope { order('rank DESC') }
+  scope :visible_to, -> (user) { user ? all : joins(:topic).where('topics.public' => true) }
 
   def update_rank
     age_in_days = (created_at - Time.new(1970,1,1)) / 1.day.seconds
