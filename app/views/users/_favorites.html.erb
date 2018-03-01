@@ -1,0 +1,17 @@
+<% @user.favorites.each do |favorite| %>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="media-left">
+        <% post = @user.find_post(favorite) %>
+        <%= image_tag post.user.avatar_url(48), class: 'pull-left media-object' %>
+      </div>
+      <div class="media-body">
+        <h4><%= link_to "#{post.title}", topic_post_path(post.topic, post)%></h4>
+        <p><%= post.body[0..50].gsub(/\s\w+\s*$/,'...') %><p>
+      <small>
+        <%= post.comments.count %> comments, <%= post.points %> votes
+      </small>
+      </div>
+    </div>
+  </div>
+<% end %>

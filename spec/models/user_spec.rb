@@ -110,4 +110,14 @@ RSpec.describe User, type: :model do
       expect(known_user.avatar_url(48)).to eq(expected_gravatar)
     end
   end
+
+  describe ".find_post" do
+    let(:user) { create(:user) }
+    let(:post) { create(:post) }
+    it "finds the correct post that the user favorited" do
+      favorite = user.favorites.create(post: post)
+      return_post = user.find_post(favorite)
+      expect(return_post).to eq(post)
+    end
+  end
 end

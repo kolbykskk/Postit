@@ -43,22 +43,6 @@
 <div class="row">
   <div class="col-md-8">
     <h2>Posts that <%= @user.name %> has favorited</h2>
-    <%= @user.favorites.each do |fav| %>
-    <div class="row">
-      <div class="col-md-8">
-      <% find_post = Post.find_by(id: fav.post_id) %>
-      <div class="media-left">
-        <%= image_tag find_post.user.avatar_url(48), class: 'pull-left media-object ' %>
-      </div>
-      <div class="media-body">
-        <h4><%= find_post.title %></h4>
-        <p><%= find_post.body[0..50].gsub(/\s\w+\s*$/,'...') %><p>
-        <small>
-          <%= find_post.comments.count %> comments
-        </small>
-      </div>
-    </div>
-  </div>
-    <% end %>
+      <%= render "users/favorites", locals: { user: @user } %>
   </div>
 </div>

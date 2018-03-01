@@ -28,4 +28,8 @@ class User < ApplicationRecord
     gravatar_id = Digest::MD5::hexdigest(self.email).downcase
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
   end
+
+  def find_post(favorite)
+    Post.find_by(id: favorite.post_id)
+  end
 end
