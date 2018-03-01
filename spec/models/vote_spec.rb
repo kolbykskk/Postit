@@ -18,7 +18,7 @@ RSpec.describe Vote, type: :model do
     end
 
     it "update_post should call update_rank on post" do
-      expect(post).to receive(:update_rank).at_least(:once)
+      expect(vote.post).to receive(:update_rank).at_least(:once)
       vote.save!
     end
   end
